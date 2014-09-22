@@ -1,4 +1,4 @@
-	.global_start
+	.global _start
 _start:
 	MOV R1,#11
 	MOV R2,#5
