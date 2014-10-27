@@ -15,7 +15,7 @@ mainmenu:
 
 .globl main
 main:
-	bl mainmenu
+	@bl mainmenu
 	str lr, [sp,#-4]
 	sub sp, sp, #4
 	mov r1, sp
