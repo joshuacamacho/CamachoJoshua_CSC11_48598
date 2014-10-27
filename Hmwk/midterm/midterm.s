@@ -11,7 +11,13 @@ mainmenu:
 	bl printf
 	ldr lr, [sp], #+4
 	bx lr
-	
+
+problem1:
+	str lr, [sp,#-4]!
+	ldr r0, address_of_problem1text
+	bl printf
+	ldr lr, [sp], #+4
+	bx lr
 
 
 .globl main
@@ -28,11 +34,13 @@ main:
 	ldr r0, address_of_testformat
 	bl printf
 	add sp, sp, #+4    /* Discard the integer read by scanf */
+	CMP r1, #1
+	BLEQ problem1
+	
     ldr lr, [sp], #+4  /* Pop the top of the stack and put it in lr */
-	
-	
 	bx lr
 
 address_of_menutext: .word menutext
 address_of_format: .word format
 address_of_testformat: .word testformat
+address_of_problem1text: .word problem1text
