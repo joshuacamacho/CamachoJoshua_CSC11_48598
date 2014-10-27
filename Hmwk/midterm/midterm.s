@@ -1,5 +1,6 @@
 .data
-	menutext: .asciz "222222"
+	menutext: .asciz "
+	Main Menu"
 .text
 
 .globl main
