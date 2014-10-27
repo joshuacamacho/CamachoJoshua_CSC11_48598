@@ -1,7 +1,7 @@
 .data
 	menutext: .asciz "Main Menu\n-------------\n1. Problem 1\n2. Problem 2\n3. Problem 3\nEnter the problem number\n"
 	format: .asciz "%d"
-	problem1text: .asciz "Problem 1"
+	problem1text: .asciz "Problem 1\n"
 	testformat: .asciz "you typed %d"
 .text
 
@@ -31,8 +31,8 @@ main:
 	
 	bl scanf
 	ldr r1, [sp]
-	ldr r0, address_of_testformat
-	bl printf
+	@ldr r0, address_of_testformat
+	@bl printf
 	add sp, sp, #+4    /* Discard the integer read by scanf */
 	CMP r1, #1
 	BLEQ problem1
