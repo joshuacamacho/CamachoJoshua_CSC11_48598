@@ -65,7 +65,7 @@ tripletime:
 	MUL r3, r1, r3
 	ADD r2, r2, r3
 	MOV r1, r1, LSL#1
-	MOV r3, [sp]
+	LDR r3, [sp]
 	sub r1, r1, r3
 	sub r0, r0, #40
 	MUL r0, r1, r0
