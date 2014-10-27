@@ -23,7 +23,7 @@ main:
 	
 	bl scanf
 	ldr r0, [r1]
-	bl printf
+	@bl printf
 	add sp, sp, #+4    /* Discard the integer read by scanf */
     ldr lr, [sp], #+4  /* Pop the top of the stack and put it in lr */
 	
