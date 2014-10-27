@@ -1,7 +1,8 @@
 .data
 	menutext: .asciz "Main Menu\n-------------\n1. Problem 1\n2. Problem 2\n3. Problem 3\nEnter the problem number\n"
 	format: .asciz "%d"
-	problem1text: .asciz "Problem 1\n"
+	problem1text: .asciz "\n\nEnter pay rate\n"
+	problem1text2: .asciz "\n\nEnter hours worked\n"
 	problem2text: .asciz "Problem 2\n"
 	problem3text: .asciz "Problem 3\n"
 	testformat: .asciz "you typed %d"
@@ -18,6 +19,12 @@ problem1:
 	str lr, [sp,#-4]!
 	ldr r0, address_of_problem1text
 	bl printf
+	ldr r0, address_of_format
+	sub sp, sp, #4
+	mov r1, sp
+	bl scanf
+	
+	
 	ldr lr, [sp], #+4
 	bx lr
 problem2:
@@ -64,5 +71,6 @@ address_of_menutext: .word menutext
 address_of_format: .word format
 address_of_testformat: .word testformat
 address_of_problem1text: .word problem1text
+address_of_problem1text2: .word problem1text2
 address_of_problem2text: .word problem2text
 address_of_problem3text: .word problem3text
