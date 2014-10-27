@@ -3,7 +3,7 @@
 	format: .asciz "%d"
 	problem1text: .asciz "\n\nEnter pay rate\n"
 	problem1text2: .asciz "Enter hours worked\n"
-	problem1text3: .asciz "Gross pay $%d"
+	problem1text3: .asciz "Gross pay $%d\n"
 	problem2text: .asciz "Problem 2\n"
 	problem3text: .asciz "Problem 3\n"
 	testformat: .asciz "you typed %d"
@@ -25,19 +25,32 @@ problem1:
 	mov r1, sp
 	bl scanf         @get payrate
 	ldr r0, address_of_problem1text2
-	
 	bl printf        @ask for hours
 	ldr r0, address_of_format
 	sub sp, sp, #4
 	mov r1, sp
 	bl scanf
 	
-	ldr r0, [sp]
+	ldr r0, [sp] @r0 = hours
 	add sp, sp, #+4
-	ldr r1, [sp]
+	ldr r1, [sp]  @r1 = payrate
 	add sp, sp, #+4
+	CMP r0, #20
+	BEQ nullovertime
+	CMP r0, #40
+	BLE doubletime
+	CMP r0, #60
+	BLE tripletime
 	
+	@REMEMBER TO GIVE ERROR FOR GREATER THAN 60 HOURS 
+	BAL end 
+nullovertime:
 	MUL r1, r0, r1
+	BAL prob1end
+doubletime:
+	MOV r3, #20
+	
+prob1end:
 	ldr r0, address_of_problem1text3
 	bl printf
 	ldr lr, [sp], #+4
