@@ -16,8 +16,9 @@ mainmenu:
 
 .globl main
 main:
-	bl mainmenu
 	str lr, [sp,#-4]!
+	bl mainmenu
+	
 	sub sp, sp, #4
 	ldr r0, address_of_format
 	mov r1, sp
