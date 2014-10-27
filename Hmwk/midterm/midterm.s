@@ -49,7 +49,9 @@ nullovertime:
 	BAL prob1end
 doubletime:
 	MOV r3, #20
-	
+	BAL prob1end
+tripletime:
+	BAL prob1end
 prob1end:
 	ldr r0, address_of_problem1text3
 	bl printf
