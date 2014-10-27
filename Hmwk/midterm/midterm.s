@@ -56,14 +56,16 @@ doubletime:
 	ADD r0, r0, r2
 	MOV r1, r0
 	BAL prob1end
-tripletime:
-	BAL prob1end
+tripletime:          @r0= hours
+	BAL prob1end     @r1= payrate
 	MOV r3, #20
 	MUL r2, r1, r3
-	str r1, [sp,#-4]!
+	MOV r3, r1
+	str r3, [sp,#-4]!
+	MOV r3, #20
 	MOV r1, r1, LSL#1
 	MUL r3, r1, r3
-	ADD r2, r2, r3
+	ADD r2, r2, r3    @r2 double time
 	MOV r1, r1, LSL#1
 	LDR r3, [sp]
 	sub r1, r1, r3
