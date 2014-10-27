@@ -65,4 +65,4 @@ address_of_format: .word format
 address_of_testformat: .word testformat
 address_of_problem1text: .word problem1text
 address_of_problem2text: .word problem2text
-address_of_problem3text: .word problem2text
+address_of_problem3text: .word problem3text
