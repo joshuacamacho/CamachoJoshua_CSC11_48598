@@ -44,7 +44,7 @@ problem1:
 	BLE tripletime
 	
 	@REMEMBER TO GIVE ERROR FOR GREATER THAN 60 HOURS 
-	ldr r0, adress_of_problem1text3
+	ldr r0, adress_of_problem1text4
 	BL printf
 	BAL problem1 
 nullovertime:
