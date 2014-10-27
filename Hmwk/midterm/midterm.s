@@ -36,7 +36,13 @@ main:
 	add sp, sp, #+4    /* Discard the integer read by scanf */
 	CMP r1, #1
 	BLEQ problem1
+	CMP r1, #2
+	CMP r1, #3
 	
+	CMP r1, #0
+	BEQ end
+	BAL main
+end:
     ldr lr, [sp], #+4  /* Pop the top of the stack and put it in lr */
 	bx lr
 
