@@ -18,6 +18,7 @@ mainmenu:
 	bx lr
 
 problem1:
+start:
 	str lr, [sp,#-4]!
 	ldr r0, address_of_problem1text
 	bl printf        @ask for payrate
@@ -46,7 +47,7 @@ problem1:
 	@REMEMBER TO GIVE ERROR FOR GREATER THAN 60 HOURS 
 	ldr r0, address_of_problem1text4
 	BL printf
-	BAL prob1end 
+	BAL start 
 nullovertime:
 	MUL r1, r0, r1
 	BAL prob1end
