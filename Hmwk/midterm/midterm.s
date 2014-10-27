@@ -46,7 +46,7 @@ problem1:
 	@REMEMBER TO GIVE ERROR FOR GREATER THAN 60 HOURS 
 	ldr r0, address_of_problem1text4
 	BL printf
-	BAL problem1 
+	BAL prob1end 
 nullovertime:
 	MUL r1, r0, r1
 	BAL prob1end
