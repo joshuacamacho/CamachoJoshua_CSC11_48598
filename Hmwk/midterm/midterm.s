@@ -61,15 +61,15 @@ tripletime:          @r0= hours
 	MOV r3, #20
 	MUL r2, r1, r3
 	MOV r3, r1
-	str r3, [sp,#-4]!
+	@str r3, [sp,#-4]!
 	MOV r3, #20
 	MOV r1, r1, LSL#1
 	MUL r3, r1, r3
 	ADD r2, r2, r3    @r2 double time
 	MOV r1, r1, LSL#1
-	LDR r3, [sp]
-	add sp, sp, #+4
-	sub r1, r1, r3
+	@LDR r3, [sp]
+	@add sp, sp, #+4
+	@sub r1, r1, r3
 	sub r0, r0, #40
 	MUL r0, r1, r0
 	ADD r0, r0, r2
