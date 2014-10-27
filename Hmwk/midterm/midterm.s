@@ -23,7 +23,8 @@ problem1:
 	sub sp, sp, #4
 	mov r1, sp
 	bl scanf
-	
+	ldr r1, [sp]
+	add sp, sp, #+4
 	
 	ldr lr, [sp], #+4
 	bx lr
