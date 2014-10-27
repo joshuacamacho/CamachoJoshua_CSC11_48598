@@ -22,7 +22,7 @@ main:
 	mov r1, sp
 	
 	bl scanf
-	ldr r0, [r1]
+	ldr r0, [sp]
 	@bl printf
 	add sp, sp, #+4    /* Discard the integer read by scanf */
     ldr lr, [sp], #+4  /* Pop the top of the stack and put it in lr */
