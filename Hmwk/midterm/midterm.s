@@ -18,7 +18,6 @@ mainmenu:
 	bx lr
 
 problem1:
-start:
 	str lr, [sp,#-4]!
 	ldr r0, address_of_problem1text
 	bl printf        @ask for payrate
@@ -47,7 +46,7 @@ start:
 	@REMEMBER TO GIVE ERROR FOR GREATER THAN 60 HOURS 
 	ldr r0, address_of_problem1text4
 	BL printf
-	BAL start 
+	BAL badend
 nullovertime:
 	MUL r1, r0, r1
 	BAL prob1end
@@ -78,11 +77,13 @@ tripletime:          @r0= hours
 	MUL r0, r1, r0    @r0 triplerate * triplehours
 	ADD r0, r0, r2    @r0 = normal + double + triple time
 	MOV r1, r0
-	
 	BAL prob1end
 prob1end:
 	ldr r0, address_of_problem1text3
 	bl printf
+	ldr lr, [sp], #+4
+	bx lr
+badend:
 	ldr lr, [sp], #+4
 	bx lr
 problem2:
