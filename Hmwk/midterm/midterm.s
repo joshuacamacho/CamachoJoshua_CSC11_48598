@@ -49,6 +49,12 @@ nullovertime:
 	BAL prob1end
 doubletime:
 	MOV r3, #20
+	MUL r3, r1, r3
+	sub r0, r0, #20
+	MOV r1, r1, LSL#1
+	MUL r0, r1, r0
+	ADD r0, r0, r3
+	MOV r1, r0
 	BAL prob1end
 tripletime:
 	BAL prob1end
