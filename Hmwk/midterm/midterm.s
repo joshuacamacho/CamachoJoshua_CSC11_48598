@@ -58,6 +58,13 @@ doubletime:
 	BAL prob1end
 tripletime:
 	BAL prob1end
+	MOV r3, #20
+	MUL r2, r1, r3
+	MOV r1, r1, LSL#1
+	MUL r3, r1, r3
+	ADD r2, r2, r3
+	MOV r1, r1, LSL#1
+	sub r0, r0, #40
 	
 prob1end:
 	ldr r0, address_of_problem1text3
