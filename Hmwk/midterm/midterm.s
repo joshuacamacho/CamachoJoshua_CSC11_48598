@@ -59,20 +59,20 @@ doubletime:
 tripletime:          @r0= hours
 	BAL prob1end     @r1= payrate
 	MOV r3, #20
-	MUL r2, r1, r3
-	MOV r3, r1
+	MUL r2, r1, r3   @r2 normal time
+	@MOV r3, r1
 	@str r3, [sp,#-4]!
-	MOV r3, #20
-	MOV r1, r1, LSL#1
-	MUL r3, r1, r3
-	ADD r2, r2, r3    @r2 double time
-	MOV r1, r1, LSL#1
+	@MOV r3, #20
+	MOV r1, r1, LSL#1 @r1 payrate * 2
+	MUL r3, r1, r3    @r3 doube time
+	ADD r2, r2, r3    @r2 normal time + double time
+	MOV r1, r1, LSL#1 @r1 payrate * 2
 	@LDR r3, [sp]
 	@add sp, sp, #+4
 	@sub r1, r1, r3
-	sub r0, r0, #40
-	MUL r0, r1, r0
-	ADD r0, r0, r2
+	sub r0, r0, #40   @r0 hours minus 40
+	MUL r0, r1, r0    @r0 triplerate * triplehours
+	ADD r0, r0, r2    @r0 = normal + double + triple time
 	MOV r1, r0
 	
 	BAL prob1end
