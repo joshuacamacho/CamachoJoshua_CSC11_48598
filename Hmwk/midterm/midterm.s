@@ -18,11 +18,12 @@ main:
 	@bl mainmenu
 	str lr, [sp,#-4]!
 	sub sp, sp, #4
+	ldr r0, address_of_format
 	mov r1, sp
-	ldr r0, address_of_format 
+	
 	bl scanf
 	ldr r0, [sp]
-	bl printf
+	@bl printf
 	add sp, sp, #+4    /* Discard the integer read by scanf */
     ldr lr, [sp], #+4  /* Pop the top of the stack and put it in lr */
 	
@@ -31,4 +32,3 @@ main:
 
 address_of_menutext: .word menutext
 address_of_format: .word format
-	
