@@ -36,7 +36,7 @@ problem1:
 	ldr r1, [sp]  @r1 = payrate
 	add sp, sp, #+4
 	CMP r0, #20
-	BEQ nullovertime
+	BLE nullovertime
 	CMP r0, #40
 	BLE doubletime
 	CMP r0, #60
