@@ -18,11 +18,21 @@ mainmenu:
 problem1:
 	str lr, [sp,#-4]!
 	ldr r0, address_of_problem1text
-	bl printf
+	bl printf        @ask for payrate
+	ldr r0, address_of_format
+	sub sp, sp, #4
+	mov r1, sp
+	bl scanf         @get payrate
+	ldr r0, address_of_problem2text
+	
+	bl printf        @ask for hours
 	ldr r0, address_of_format
 	sub sp, sp, #4
 	mov r1, sp
 	bl scanf
+	
+	ldr r0, [sp]
+	add sp, sp, #+4
 	ldr r1, [sp]
 	add sp, sp, #+4
 	
