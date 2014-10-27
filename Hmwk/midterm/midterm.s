@@ -4,6 +4,7 @@
 	problem1text: .asciz "\n\nEnter pay rate\n"
 	problem1text2: .asciz "Enter hours worked\n"
 	problem1text3: .asciz "Gross pay $%d\n"
+	problem1text4: .asciz "Error, hours cannot be greater than 60\n"
 	problem2text: .asciz "Problem 2\n"
 	problem3text: .asciz "Problem 3\n"
 	testformat: .asciz "you typed %d"
@@ -43,7 +44,9 @@ problem1:
 	BLE tripletime
 	
 	@REMEMBER TO GIVE ERROR FOR GREATER THAN 60 HOURS 
-	BAL end 
+	ldr r0, adress_of_problem1text3
+	BL printf
+	BAL problem1 
 nullovertime:
 	MUL r1, r0, r1
 	BAL prob1end
@@ -69,7 +72,7 @@ tripletime:          @r0= hours
 	MOV r1, r1, LSL#1 @r1 payrate * 2
 	LDR r3, [sp]
 	add sp, sp, #+4
-	sub r1, r1, r3
+	sub r1, r1, r3    @r1 payrate * 3
 	sub r0, r0, #40   @r0 hours minus 40
 	MUL r0, r1, r0    @r0 triplerate * triplehours
 	ADD r0, r0, r2    @r0 = normal + double + triple time
@@ -127,5 +130,6 @@ address_of_testformat: .word testformat
 address_of_problem1text: .word problem1text
 address_of_problem1text2: .word problem1text2
 address_of_problem1text3: .word problem1text3
+address_of_problem1text4: .word problem1text4
 address_of_problem2text: .word problem2text
 address_of_problem3text: .word problem3text
