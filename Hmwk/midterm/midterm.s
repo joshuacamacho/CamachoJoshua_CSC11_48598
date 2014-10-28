@@ -100,7 +100,8 @@ fibonacci:
 	BEQ fibend
 evalseq:
 	sub r1, #1
-	B fibonacci
+	CMP r1, #0
+	BEQ fibend
 fibend:
 	ldr lr, [sp], #+4
 	bx lr
