@@ -87,13 +87,13 @@ badend:
 	ldr lr, [sp], #+4
 	bx lr
 problem2:
-	push{r4,lr}
+	push {lr}
 	ldr r0, address_of_problem2text
 	bl printf
 	ldr lr, [sp], #+4
 	bx lr
 problem3:
-	push{r4,lr}
+	push {lr}
 	ldr r0, address_of_problem3text
 	bl printf
 	ldr lr, [sp], #+4
