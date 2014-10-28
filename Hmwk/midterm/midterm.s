@@ -109,6 +109,7 @@ evalseq:
 	ADD r3, r0, r2
 	MOV r0, r2
 	MOV r2, r3
+	ADD r4, r4, #1
 	BAL evalseq
 fibend:
 	MOV r1, r4
