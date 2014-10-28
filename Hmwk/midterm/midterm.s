@@ -100,7 +100,7 @@ fibonacci:
 	MOV r2, #1  @r2 = c
 	MOV r3, #0  @r3 = r
 	push {r4}
-	MOV r4, #0  @r4 = i
+	MOV r4, #1  @r4 = i
 	CMP r1, #0  @r1 = n seqence
 	BEQ fibend
 evalseq:
