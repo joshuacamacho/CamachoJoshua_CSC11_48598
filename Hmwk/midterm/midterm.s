@@ -6,7 +6,8 @@
 	problem1text3: .asciz "Gross pay $%d\n"
 	problem1text4: .asciz "Error, hours cannot be greater than 60\n"
 	problem2text: .asciz "Problem 2\n"
-	problem3text: .asciz "Problem 3\n"
+	problem3text: .asciz "Enter Fibonacci term to be evaluated\n"
+	problem3text2: .asciz "Evaluted number: %d\n"
 	testformat: .asciz "you typed %d"
 .text
 
@@ -67,7 +68,7 @@ tripletime:          @r0= hours
 	str r3, [sp,#-4]!
 	MOV r3, #20
 	MOV r1, r1, LSL#1 @r1 payrate * 2
-	MUL r3, r1, r3    @r3 doube time
+	MUL r3, r1, r3    @r3 double time
 	ADD r2, r2, r3    @r2 normal time + double time
 	MOV r1, r1, LSL#1 @r1 payrate * 2
 	LDR r3, [sp]
@@ -96,8 +97,30 @@ problem3:
 	push {lr}
 	ldr r0, address_of_problem3text
 	bl printf
+	ldr r0, address_of_format
+	sub sp, sp #4
+	MOV r1, sp
+	bl scanf
+	ldr r1, [sp]       @r1 = fib value to evaluate
+	add sp, sp, #+4    @scanf value knocked off stack
+	bl fibonacci
+	
+	ldr r0, address_of_problem3text2
+	BL printf
+	
 	ldr lr, [sp], #+4
 	bx lr
+fibonacci:
+	push {lr}
+	CMP r1, #0
+	BEQ fibend
+evalseq:
+	sub r1, #1
+	B fibonacci
+fibend:
+	ldr lr, [sp], #+4
+	bx lr
+	
 
 .globl main
 main:
@@ -110,8 +133,6 @@ main:
 	
 	bl scanf
 	ldr r1, [sp]
-	@ldr r0, address_of_testformat
-	@bl printf
 	add sp, sp, #+4    /* Discard the integer read by scanf */
 	CMP r1, #1
 	BLEQ problem1
@@ -135,3 +156,4 @@ address_of_problem1text3: .word problem1text3
 address_of_problem1text4: .word problem1text4
 address_of_problem2text: .word problem2text
 address_of_problem3text: .word problem3text
+address_of_problem3text2: .word problem3text2
