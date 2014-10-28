@@ -98,7 +98,7 @@ problem3:
 	ldr r0, address_of_problem3text
 	bl printf
 	ldr r0, address_of_format
-	sub sp, sp #4
+	sub sp, sp, #4
 	MOV r1, sp
 	bl scanf
 	ldr r1, [sp]       @r1 = fib value to evaluate
