@@ -96,9 +96,19 @@ problem2:
 	
 fibonacci:
 	push {lr}
-	CMP r1, #0
+	MOV r0, #0  @r0 = first
+	MOV r2, #1  @r2 = second
+	MOV r3, #0  @r3 = c
+	CMP r1, #0  @r1 = n seqence
 	BEQ fibend
 evalseq:
+	CMP r3, r1
+	BLT fibgo
+fibgo:
+	CMP r3, #1
+	BGT elsefib
+	
+elsefib:
 	sub r1, #1
 	bl fibonacci
 fibend:
