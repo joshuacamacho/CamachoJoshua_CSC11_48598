@@ -93,6 +93,18 @@ problem2:
 	bl printf
 	ldr lr, [sp], #+4
 	bx lr
+	
+fibonacci:
+	push {lr}
+	CMP r1, #0
+	BEQ fibend
+evalseq:
+	sub r1, #1
+	B fibonacci
+fibend:
+	ldr lr, [sp], #+4
+	bx lr
+
 problem3:
 	push {lr}
 	ldr r0, address_of_problem3text
@@ -110,16 +122,7 @@ problem3:
 	
 	ldr lr, [sp], #+4
 	bx lr
-fibonacci:
-	push {lr}
-	CMP r1, #0
-	BEQ fibend
-evalseq:
-	sub r1, #1
-	B fibonacci
-fibend:
-	ldr lr, [sp], #+4
-	bx lr
+
 	
 
 .globl main
