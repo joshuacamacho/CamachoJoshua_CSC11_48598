@@ -112,7 +112,7 @@ evalseq:
 	ADD r4, r4, #1
 	BAL evalseq
 fibend:
-	MOV r1, r4
+	MOV r1, r3
 	pop {r4}
 	ldr lr, [sp], #+4
 	bx lr
