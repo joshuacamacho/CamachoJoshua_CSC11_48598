@@ -101,7 +101,7 @@ fibonacci:
 evalseq:
 	sub r1, #1
 	CMP r1, #0
-	BEQ fibend
+	BGT fibonacci
 fibend:
 	ldr lr, [sp], #+4
 	bx lr
