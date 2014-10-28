@@ -1,8 +1,8 @@
 .data
-	menutext: .asciz "Main Menu\n-------------\n1. Problem 1\n2. Problem 2\n3. Problem 3\nEnter the problem number\n"
+	menutext: .asciz "Main Menu\n-------------\n1. Problem 1\n2. Problem 2\n3. Problem 3\nEnter the problem number, 0 to exit\n"
 	format: .asciz "%d"
 	problem1text: .asciz "\n\nEnter pay rate\n"
-	problem1text2: .asciz "Enter hours worked\n"
+	problem1text2: .asciz "Enter hours worked, max 60\n"
 	problem1text3: .asciz "Gross pay $%d\n"
 	problem1text4: .asciz "Error, hours cannot be greater than 60\n"
 	problem2text: .asciz "Problem 2\n"
