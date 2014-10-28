@@ -134,7 +134,7 @@ p1overonce:
 p1overtwice:
 	MUL r4, r6, r4
 	ADD r3, r3, r4
-	MOV r6, LSL#1
+	MOV r6, r6, LSL#1
 	SUB r0, r0, r6
 	MUL r0, r5, r0
 	ADD r3, r3, r0
