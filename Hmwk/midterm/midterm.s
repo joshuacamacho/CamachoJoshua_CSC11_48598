@@ -5,7 +5,9 @@
 	problem1text2: .asciz "Enter hours worked, max 60\n"
 	problem1text3: .asciz "Gross pay $%d\n"
 	problem1text4: .asciz "Error, hours cannot be greater than 60\n"
-	problem2text: .asciz "Problem 2\n"
+	problem2text: .asciz "Which package do you have? 1 2 or 3?\n"
+	problem2text2: .asciz "How many hours did you use?\n"
+	problem2text3: .asciz "Your bill $%d\n"
 	problem3text: .asciz "Enter Fibonacci term to be evaluated\n"
 	problem3text2: .asciz "Evaluted number: %d\n"
 	testformat: .asciz "you typed %d"
@@ -91,6 +93,63 @@ problem2:
 	push {lr}
 	ldr r0, address_of_problem2text
 	bl printf
+	ldr r0, address_of_format
+	sub sp, sp, #4
+	MOV r1, sp
+	bl scanf
+	ldr r0, address_of_problem2text2
+	bl printf        @ask for hours
+	ldr r0, address_of_format
+	sub sp, sp, #4
+	mov r1, sp
+	bl scanf
+	ldr r0, [sp]   @r0 = hours
+	add sp, sp, #+4
+	ldr r1, [sp]   @r1 = package
+	add sp, sp, #+4
+
+	CMP r1, #1
+	BEQ package1
+	CMP r1, #2
+	BEQ package2
+	CMP r1, #3
+	BEQ package3
+package1:
+	MOV r3, #30  @monthly fee
+	push {r4}
+	MOV r4, #3   @first hourly charge
+	push {r5}
+	MOV r5, #6   @second hourly charge
+	push {r6}
+	MOV r6, #11  @hourly limit base
+	CMP r0, r6  @first hourly limit
+	BLT prob2end
+p1overonce:
+	CMP r0, #22  @second hourly limit
+	BGT p1overtwice
+	SUB r0, r0, r6
+	MUL r0, r4, r0
+	ADD r3, r0
+	BAL prob2end
+p1overtwice:
+	MUL r4, r6, r4
+	ADD r3, r3, r4
+	MOV r6, LSL#1
+	SUB r0, r0, r6
+	MUL r0, r5, r0
+	ADD r3, r3, r0
+	BAL prob2end
+package2:
+	
+	BAL prob2end
+package3:
+
+prob2end:
+	@r3 contains result
+	pop {r4-r6}
+	ldr r0, address_of_problem2text3
+	MOV r1, r3
+	BL printf
 	ldr lr, [sp], #+4
 	bx lr
 	
@@ -170,5 +229,7 @@ address_of_problem1text2: .word problem1text2
 address_of_problem1text3: .word problem1text3
 address_of_problem1text4: .word problem1text4
 address_of_problem2text: .word problem2text
+address_of_problem2text2: .word problem2text2
+address_of_problem2text3: .word problem2text3
 address_of_problem3text: .word problem3text
 address_of_problem3text2: .word problem3text2
