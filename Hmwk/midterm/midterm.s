@@ -96,22 +96,23 @@ problem2:
 	
 fibonacci:
 	push {lr}
-	MOV r0, #0  @r0 = first
-	MOV r2, #1  @r2 = second
-	MOV r3, #0  @r3 = c
+	MOV r0, #0  @r0 = p
+	MOV r2, #1  @r2 = c
+	MOV r3, #0  @r3 = r
+	push {r4}
+	MOV r4, #0  @r4 = i
 	CMP r1, #0  @r1 = n seqence
 	BEQ fibend
 evalseq:
-	CMP r3, r1
-	BLT fibgo
-fibgo:
-	CMP r3, #1
-	BGT elsefib
-	
-elsefib:
-	sub r1, #1
-	bl fibonacci
+	CMP r4, r1
+	BGE fibend
+	ADD r3, r0, r2
+	MOV r0, r2
+	MOV r2, r3
+	BAL evalseq
 fibend:
+	MOV r1, r4
+	pop {r4}
 	ldr lr, [sp], #+4
 	bx lr
 
