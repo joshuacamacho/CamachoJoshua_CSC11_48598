@@ -139,9 +139,33 @@ p1overtwice:
 	MUL r0, r5, r0
 	ADD r3, r3, r0
 	BAL prob2end
+
 package2:
-	
+	MOV r3, #35  @monthly fee
+	push {r4}
+	MOV r4, #2   @first hourly charge
+	push {r5}
+	MOV r5, #4   @second hourly charge
+	push {r6}
+	MOV r6, #22  @hourly limit base
+	CMP r0, r6  @first hourly limit
+	BLT prob2end
+p2overonce:
+	CMP r0, #44  @second hourly limit
+	BGT p2overtwice
+	SUB r0, r0, r6
+	MUL r0, r4, r0
+	ADD r3, r0
 	BAL prob2end
+p2overtwice:
+	MUL r4, r6, r4
+	ADD r3, r3, r4
+	MOV r6, r6, LSL#1
+	SUB r0, r0, r6
+	MUL r0, r5, r0
+	ADD r3, r3, r0
+	BAL prob2end
+
 package3:
 
 prob2end:
