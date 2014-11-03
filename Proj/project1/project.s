@@ -14,7 +14,6 @@
 
 main:
 	push {lr}
-	@str lr, [sp,#-4]!
 	ldr r0, address_of_introtext
 	bl printf
 	@ldr r0, address_of_numformat
@@ -22,7 +21,6 @@ main:
 
 end:
 	pop {lr}
-	@ldr lr, [sp], #+4
 	bx lr
 
 address_of_introtext: .word introtext
