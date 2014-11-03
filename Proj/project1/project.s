@@ -6,8 +6,20 @@
 	introtext2: .asciz "You awake in a dark dungeon cellar.\nYou have been wrongly banished to a realm of despair.\nYou you must defeat 10 different creatures from the realm of despair to escape.\nPress Enter to Continue\n"
 	spacing: .asciz "\033[H\033[2J"
 	charformat: .asciz "%c"
+	entercontinue: .asciz "Press Enter to Continue\n"
 
 .text
+entertocontinue:
+	push {lr}
+	ldr r0, address_of_entercontinue
+	bl printf
+	ldr r0, address_of_charformat
+	sub sp, sp, #4
+	mov r1, sp
+	bl scanf                          @ Ask for enter to be pressed
+	add sp, sp, #+4
+	pop {lr}
+	bx lr
 putspacing:
 	push {lr}
 	ldr r0, address_of_spacing
@@ -18,25 +30,14 @@ intro:
 	push {lr}
 	ldr r0, address_of_introtext
 	bl printf                         @ Display Intro text
-	ldr r0, address_of_charformat
-	sub sp, sp, #4
-	mov r1, sp
-	bl scanf                          @ Ask for enter to be pressed
-	add sp, sp, #+4
+	bl entertocontinue
 	bl putspacing
 	ldr r0, address_of_introtext2
 	bl printf                         @ Intro text 2
-	ldr r0, address_of_charformat
-	sub sp, sp, #4
-	mov r1, sp
-	bl scanf                          @ Ask for enter to be pressed
-	add sp, sp, #+4
+	bl entertocontinue
 	bl putspacing
-	@ldr r0, address_of_spacing
-	@bl printf                         @ Put spacing
 	pop {lr}
 	bx lr
-
 .globl main
 
 main:
@@ -51,3 +52,4 @@ address_of_introtext: .word introtext
 address_of_introtext2: .word introtext2
 address_of_spacing: .word spacing
 address_of_charformat: .word charformat
+address_of_entercontinue: .word entercontinue
