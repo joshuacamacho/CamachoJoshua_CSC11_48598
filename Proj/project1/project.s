@@ -138,7 +138,8 @@ askloop:
 	beq rollrun
 	ldr r0, address_of_fightbadinput
 	bl printf
-	ldr r0, [add_stdin, #0]
+	ldr r3, [add_stdin, #0]
+	mov r0, r3
 	bl fflush
 	@ldr r0, address_of_charformat
 	@sub sp, sp, #4
