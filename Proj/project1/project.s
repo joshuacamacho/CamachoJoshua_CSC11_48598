@@ -13,14 +13,15 @@
 .globl main
 
 main:
-	pop {lr}
-	@stuffs
+	@pop {lr}
+	str lr, [sp,#-4]!
 	ldr r0, address_of_introtext
 	bl printf
 
 
 end:
-	push {lr}
+	@push {lr}
+	ldr lr, [sp], #+4
 	bx lr
 
 address_of_introtext: .word introtext
