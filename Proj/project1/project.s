@@ -132,7 +132,7 @@ askloop:
 	beq rollfight
 	cmp r2, #114 @did user type 'r'?
 	beq rollrun
-	ldr r0, address_of_badinput
+	ldr r0, address_of_fightbadinput
 	bl printf
 	bal askloop
 rollfight:
