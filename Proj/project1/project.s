@@ -135,9 +135,9 @@ askloop:
 	ldr r0, address_of_fightbadinput
 	bl printf
 	@bal askloop
-rollfight:
+@rollfight:
 	@roll against str
-rollrun:
+@rollrun:
 	@roll against runchance
 end:
 	pop {lr}
