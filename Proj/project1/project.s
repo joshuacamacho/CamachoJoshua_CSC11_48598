@@ -141,6 +141,7 @@ askloop:
 	bal askloop
 rollfight:
 	@roll against str
+	ldr r0, address_of_charformat
 	sub sp, sp, #4
 	mov r1, sp
 	bl scanf
