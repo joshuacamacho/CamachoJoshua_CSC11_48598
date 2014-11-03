@@ -128,9 +128,9 @@ fightrunloop:
 askloop:
 	ldr r0, address_of_charformat
 	bl scanf
-	cmp r1, #102 @did user type 'f'?
+	@cmp r1, #102 @did user type 'f'?
 	beq rollfight
-	cmp r2, #114 @did user type 'r'?
+	@cmp r2, #114 @did user type 'r'?
 	beq rollrun
 	ldr r0, address_of_fightbadinput
 	bl printf
