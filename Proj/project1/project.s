@@ -27,8 +27,9 @@ main:
 	bl printf                         @ Put spacing
 	ldr r0, address_of_introtext2
 	bl printf                         @ Intro text 2
+	ldr r0, address_of_charformat
 	sub sp, sp, #4
-	@mov r1, sp
+	mov r1, sp
 	bl scanf                          @ Ask for enter to be pressed
 	add sp, sp, #+4
 
