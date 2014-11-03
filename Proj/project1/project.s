@@ -7,7 +7,7 @@
 	spacing: .asciz "\033[H\033[2J"
 	charformat: .asciz "%c"
 	entercontinue: .asciz "Press Enter to Continue\n"
-
+	rattext: .asciz "You encounter a small rat, it is feral but it looks (mostly) harmless"
 .text
 entertocontinue:
 	push {lr}
@@ -30,7 +30,6 @@ intro:
 	push {lr}
 	ldr r0, address_of_introtext
 	bl printf                         @ Display Intro text
-	bl entertocontinue
 	bl putspacing
 	ldr r0, address_of_introtext2
 	bl printf                         @ Intro text 2
@@ -38,18 +37,60 @@ intro:
 	bl putspacing
 	pop {lr}
 	bx lr
+randnum:
+	push {lr}
+	@r0 is max num r1 is return
+	mov r1, #20 @not random yet but return
+	pop {lr}
+	bx lr
+loadmonster:
+	push {lr}
+	cmp r0, #20
+	ble rat
+rat:
+	ldr r0, address_of_rattext
+	mov r1, #20
+	mov r2, #1
+	bal endload
+centipede:
+
+giantspider:
+
+madman:
+
+skeleton:
+
+ogre:
+
+dragon:
+
+endload:
+	pop {lr}
+	bx lr
 .globl main
 
 main:
 	push {lr}
-	bl intro
-	
+	bl intro	
+	mov r10, #10 @ counter for battles
+	mov r9, #100 @ hitpoints
+fightloop:
+	cmp r9, #0
+	ble died
+	ldr r0, #100 @ roll max value for monster
+	bl randnum
+	mov r0, r1 @set r0 to the rand num
+	bl loadmonster
+	bl printf
 end:
 	pop {lr}
 	bx lr
-
+died:
+	@you died text
+	bal end
 address_of_introtext: .word introtext
 address_of_introtext2: .word introtext2
 address_of_spacing: .word spacing
 address_of_charformat: .word charformat
 address_of_entercontinue: .word entercontinue
+address_of_rattext: .word rattext
