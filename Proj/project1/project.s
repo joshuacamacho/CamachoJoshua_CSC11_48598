@@ -129,12 +129,12 @@ askloop:
 	ldr r0, address_of_charformat
 	bl scanf
 	@cmp r1, #102 @did user type 'f'?
-	beq rollfight
+	@beq rollfight
 	@cmp r2, #114 @did user type 'r'?
-	beq rollrun
+	@beq rollrun
 	ldr r0, address_of_fightbadinput
 	bl printf
-	bal askloop
+	@bal askloop
 rollfight:
 	@roll against str
 rollrun:
