@@ -8,7 +8,7 @@
 	charformat: .asciz "%c"
 
 .text
-spacing:
+putspacing:
 	push {lr}
 	ldr r0, address_of_spacing
 	bl printf                         @ Put spacing
@@ -23,7 +23,7 @@ intro:
 	mov r1, sp
 	bl scanf                          @ Ask for enter to be pressed
 	add sp, sp, #+4
-	bl spacing
+	bl putspacing
 	ldr r0, address_of_introtext2
 	bl printf                         @ Intro text 2
 	ldr r0, address_of_charformat
@@ -31,7 +31,7 @@ intro:
 	mov r1, sp
 	bl scanf                          @ Ask for enter to be pressed
 	add sp, sp, #+4
-	bl spacing
+	bl putspacing
 	@ldr r0, address_of_spacing
 	@bl printf                         @ Put spacing
 	pop {lr}
