@@ -17,10 +17,10 @@ main:
 	ldr r0, address_of_introtext
 	bl printf
 	ldr r0, address_of_charformat
-	@sub sp, sp, #4
-	@mov r1, sp
+	sub sp, sp, #4
+	mov r1, sp
 	bl scanf
-	@add sp, sp, #+4
+	add sp, sp, #+4
 
 end:
 	pop {lr}
