@@ -138,7 +138,7 @@ askloop:
 	beq rollrun
 	ldr r0, address_of_fightbadinput
 	bl printf
-	mov r0, #0
+	mov r0, [add_stdin]
 	bl fflush
 	@ldr r0, address_of_charformat
 	@sub sp, sp, #4
@@ -170,3 +170,5 @@ address_of_ogretext: .word ogretext
 address_of_dragontext: .word dragontext
 address_of_fightruntext: .word fightruntext
 address_of_fightbadinput: .word fightbadinput
+add_stdin .word stdin
+
