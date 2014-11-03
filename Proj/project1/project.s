@@ -31,5 +31,5 @@ end:
 	bx lr
 
 address_of_introtext: .word introtext
-address_of_spacing .word spacing
+address_of_spacing: .word spacing
 address_of_charformat: .word charformat
