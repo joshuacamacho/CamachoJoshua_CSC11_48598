@@ -32,6 +32,8 @@ main:
 	mov r1, sp
 	bl scanf                          @ Ask for enter to be pressed
 	add sp, sp, #+4
+	ldr r0, address_of_spacing
+	bl printf                         @ Put spacing
 
 end:
 	pop {lr}
