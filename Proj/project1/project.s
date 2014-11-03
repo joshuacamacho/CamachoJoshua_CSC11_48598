@@ -16,8 +16,11 @@ main:
 	push {lr}
 	ldr r0, address_of_introtext
 	bl printf
-	@ldr r0, address_of_numformat
-	@pop {r1}
+	ldr r0, address_of_numformat
+	@sub sp, sp, #4
+	@mov r1, sp
+	bl scanf
+	@add sp, sp, #+4
 
 end:
 	pop {lr}
