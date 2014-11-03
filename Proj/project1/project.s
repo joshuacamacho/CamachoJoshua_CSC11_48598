@@ -7,7 +7,14 @@
 	spacing: .asciz "\033[H\033[2J"
 	charformat: .asciz "%c"
 	entercontinue: .asciz "Press Enter to Continue\n"
-	rattext: .asciz "You encounter a small rat, it is feral but it looks (mostly) harmless"
+	rattext: .asciz "You encounter a small rat, it is feral but it looks (mostly) harmless\n"
+	centipedetext: .asciz "A Large Centipede blocks your path.\n"
+	giantspidertext: .asciz "A Giant Spider creeps out from the dark.\n"
+	madmantext: .asciz "You come across a Mad Lunatic, a once criminal who lost his mind in the dungeon.\n"
+	skeletontext: .asciz "An animated Skeleton lets loose a high pitch cackle as he readys his exposed bone arm to take a swing at you.\n"
+	ogretext: .asciz "A large door slams to the ground in front of you and an Ogre brute walks through the doorway. Saliva is drooling from his fanged mouth as he's hungry for fresh meat.\n"
+	dragontext: .asciz "You have found the lair of Eredran, the Frozen Dragon of the North. He's already noticed you, but it's not too late to run.\n"
+
 .text
 entertocontinue:
 	push {lr}
@@ -46,25 +53,49 @@ randnum:
 	bx lr
 loadmonster:
 	push {lr}
-	cmp r0, #20
+	mov r2, #1
+	cmp r0, #40
 	ble rat
+	cmp r0, #50
+	ble centipede
+	cmp r0, #60
+	ble giantspider
+	cmp r0, #70
+	ble madman
+	cmp r0, #80
+	ble skeleton
+	cmp r0, #90
+	ble ogre
+	cmp r0, #100
+	ble dragon
 rat:
 	ldr r0, address_of_rattext
 	mov r1, #20
-	mov r2, #1
 	bal endload
 centipede:
-
+	ldr r0, address_of_centipedetext
+	mov r1, #30
+	bal endload
 giantspider:
-
+	ldr r0, address_of_giantspidertext
+	mov r1, #40
+	bal endload
 madman:
-
+	ldr r0, address_of_madmantext
+	mov r1, #50
+	bal endload
 skeleton:
-
+	ldr r0, address_of_skeletontext
+	mov r1, #60
+	bal endload
 ogre:
-
+	ldr r0, address_of_ogretext
+	mov r1, #70
+	bal endload
 dragon:
-
+	ldr r0, address_of_dragontext
+	mov r1, #80
+	bal endload
 endload:
 	pop {lr}
 	bx lr
@@ -95,3 +126,9 @@ address_of_spacing: .word spacing
 address_of_charformat: .word charformat
 address_of_entercontinue: .word entercontinue
 address_of_rattext: .word rattext
+address_of_centipedetext: .word centipedetext
+address_of_giantspidertext: .word giantspidertext
+address_of_madmantext: .word madmantext
+address_of_skeletontext: .word skeletontext
+address_of_ogretext: .word ogretext
+address_of_dragontext: .word dragontext
