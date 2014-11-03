@@ -8,13 +8,7 @@
 	charformat: .asciz "%c"
 
 .text
-
-
-
-
-.globl main
-
-main:
+intro:
 	push {lr}
 	ldr r0, address_of_introtext
 	bl printf                         @ Display Intro text
@@ -34,7 +28,15 @@ main:
 	add sp, sp, #+4
 	ldr r0, address_of_spacing
 	bl printf                         @ Put spacing
+	pop {lr}
+	bx lr
 
+.globl main
+
+main:
+	push {lr}
+	bl intro
+	
 end:
 	pop {lr}
 	bx lr
