@@ -131,9 +131,10 @@ askloop:
 	mov r1, sp
 	bl scanf
 	add sp, sp, #+4
+	ldr r1, [sp]
 	cmp r1, #102 @did user type 'f'?
 	beq rollfight
-	cmp r2, #114 @did user type 'r'?
+	cmp r1, #114 @did user type 'r'?
 	beq rollrun
 	ldr r0, address_of_fightbadinput
 	bl printf
