@@ -138,7 +138,8 @@ askloop:
 	beq rollrun
 	ldr r0, address_of_fightbadinput
 	bl printf
-	ldr r3, [add_stdin, #0]
+	ldr r3, .L2
+	ldr r3, [r3, #0]
 	mov r0, r3
 	bl fflush
 	@ldr r0, address_of_charformat
@@ -157,6 +158,8 @@ end:
 died:
 	@you died text
 	bal end
+.L2:
+	.word stdin
 address_of_introtext: .word introtext
 address_of_introtext2: .word introtext2
 address_of_spacing: .word spacing
@@ -171,5 +174,3 @@ address_of_ogretext: .word ogretext
 address_of_dragontext: .word dragontext
 address_of_fightruntext: .word fightruntext
 address_of_fightbadinput: .word fightbadinput
-add_stdin: .word stdin
-
