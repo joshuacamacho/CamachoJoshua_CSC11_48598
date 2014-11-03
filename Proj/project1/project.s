@@ -14,7 +14,7 @@
 	skeletontext: .asciz "An animated Skeleton lets loose a high pitch cackle as he readys his exposed bone arm to take a swing at you.\n"
 	ogretext: .asciz "A large door slams to the ground in front of you and an Ogre brute walks through the doorway. Saliva is drooling from his fanged mouth as he's hungry for fresh meat.\n"
 	dragontext: .asciz "You have found the lair of Eredran, the Frozen Dragon of the North. He's already noticed you, but it's not too late to run.\n"
-	fightruntext: .asciz "Strength (%d) will you (f)ight or (r)un?\n"
+	fightruntext: .asciz "Yourlife (%d) Monster strength (%d) will you (f)ight or (r)un?\n"
 .text
 entertocontinue:
 	push {lr}
@@ -113,11 +113,24 @@ fightloop:
 	bl randnum
 	mov r0, r1 @set r0 to the rand num
 	bl loadmonster
-	mov r8, r1 @ monster str
+	mov r8, r1 @ r8 = monster str 
+	mov r7, r0 @ r7 = monster text
+	mov r6, r2 @ r6 = monster alive
+fightrunloop:
+	mov r0, r7
 	bl printf
-	mov r1, r8
+	mov r1, r9
+	mov r2, r8
 	ldr r0, address_of_fightruntext
 	bl printf
+	ldr r0, address_of_charformat
+	bl scanf
+	cmp r1, r8
+	bge fightwon
+	@take damage 
+	bal fightrunloop
+fightwon:
+	@won fight
 end:
 	pop {lr}
 	bx lr
