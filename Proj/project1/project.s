@@ -15,6 +15,8 @@
 	ogretext: .asciz "A large door slams to the ground in front of you and an Ogre brute walks through the doorway. Saliva is drooling from his fanged mouth as he's hungry for fresh meat.\n"
 	dragontext: .asciz "You have found the lair of Eredran, the Frozen Dragon of the North. He's already noticed you, but it's not too late to run.\n"
 	fightruntext: .asciz "Yourlife (%d) Monster strength (%d) will you (f)ight or (r)un?\n"
+	fightbadinput: .asciz "What? do you want to (f)ight or (r)un?\n"
+
 .text
 entertocontinue:
 	push {lr}
@@ -123,14 +125,20 @@ fightrunloop:
 	mov r2, r8
 	ldr r0, address_of_fightruntext
 	bl printf
+askloop:
 	ldr r0, address_of_charformat
 	bl scanf
-	cmp r1, r8
-	bge fightwon
-	@take damage 
-	bal fightrunloop
-fightwon:
-	@won fight
+	cmp r1, #102 @did user type 'f'?
+	beq rollfight
+	cmp r2, #114 @did user type 'r'?
+	beq rollrun
+	ldr r0, address_of_badinput
+	printf
+	bal askloop
+rollfight:
+	@roll against str
+rollrun:
+	@roll against runchance
 end:
 	pop {lr}
 	bx lr
@@ -150,3 +158,4 @@ address_of_skeletontext: .word skeletontext
 address_of_ogretext: .word ogretext
 address_of_dragontext: .word dragontext
 address_of_fightruntext: .word fightruntext
+address_of_fightbadinput: .word fightbadinput
