@@ -147,6 +147,14 @@ rollfight:
 	bl scanf
 	ldr r1, [sp]
 	add sp, sp, #+4
+	
+	ldr r0, address_of_charformat
+	sub sp, sp, #4
+	mov r1, sp
+	bl scanf
+	ldr r1, [sp]
+	add sp, sp, #+4
+	
 rollrun:
 	@roll against runchance
 end:
