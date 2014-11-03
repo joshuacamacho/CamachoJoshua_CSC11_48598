@@ -77,7 +77,7 @@ main:
 fightloop:
 	cmp r9, #0
 	ble died
-	ldr r0, #100 @ roll max value for monster
+	mov r0, #100 @ roll max value for monster
 	bl randnum
 	mov r0, r1 @set r0 to the rand num
 	bl loadmonster
