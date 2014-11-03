@@ -113,7 +113,9 @@ fightloop:
 	bl randnum
 	mov r0, r1 @set r0 to the rand num
 	bl loadmonster
+	mov r8, r1 @ monster str
 	bl printf
+	mov r1, r8
 	ldr r0, address_of_fightruntext
 	bl printf
 end:
