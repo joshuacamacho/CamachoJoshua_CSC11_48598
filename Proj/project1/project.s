@@ -127,7 +127,10 @@ fightrunloop:
 	bl printf
 askloop:
 	ldr r0, address_of_charformat
+	sub sp, sp, #4
+	mov r1, sp
 	bl scanf
+	add sp, sp, #+4
 	@cmp r1, #102 @did user type 'f'?
 	@beq rollfight
 	@cmp r2, #114 @did user type 'r'?
