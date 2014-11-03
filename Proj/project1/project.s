@@ -48,7 +48,7 @@ intro:
 randnum:
 	push {lr}
 	@r0 is max num r1 is return
-	mov r1, #90 @not random yet but return
+	mov r1, #100 @not random yet but return
 	pop {lr}
 	bx lr
 loadmonster:
