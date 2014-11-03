@@ -16,6 +16,7 @@
 	dragontext: .asciz "You have found the lair of Eredran, the Frozen Dragon of the North. He's already noticed you, but it's not too late to run.\n"
 	fightruntext: .asciz "Yourlife (%d) Monster strength (%d) will you (f)ight or (r)un?\n"
 	fightbadinput: .asciz "What? do you want to (f)ight or (r)un?\n"
+	wonfighttext: .asciz "You defeated the monster!\n"
 
 .text
 entertocontinue:
@@ -111,6 +112,8 @@ main:
 fightloop:
 	cmp r9, #0
 	ble died
+	cmp r10, #0
+	ble wongame
 	mov r0, #100 @ roll max value for monster
 	bl randnum
 	mov r0, r1 @set r0 to the rand num
@@ -140,13 +143,25 @@ askloop:
 	bl printf
 	bal askloop
 rollfight:
-	@roll against str
+	@roll against monster str
+/******** bandaid to clear buffer *******/
 	ldr r0, address_of_charformat
 	sub sp, sp, #4
 	mov r1, sp
 	bl scanf
 	ldr r1, [sp]
 	add sp, sp, #+4
+/*************** end bandaid ************/	
+	mov r0, #100
+	bl randnum
+	cmp r0, r8    @compare roll with monster str
+	BGT wonfight
+wonfight:
+	ldr r0, address_of_wonfighttext
+	printf
+	bl entertocontinue
+	sub r10, r10, #1
+	bal fightloop
 	
 	ldr r0, address_of_charformat
 	sub sp, sp, #4
@@ -162,6 +177,9 @@ end:
 	bx lr
 died:
 	@you died text
+	bal end
+wongame:
+	@you win text
 	bal end
 .L2:
 	.word stdin
@@ -179,3 +197,4 @@ address_of_ogretext: .word ogretext
 address_of_dragontext: .word dragontext
 address_of_fightruntext: .word fightruntext
 address_of_fightbadinput: .word fightbadinput
+address_of_wonfighttext: .word wonfighttext
