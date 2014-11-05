@@ -16,9 +16,14 @@
 	dragontext: .asciz "You have found the lair of Eredran, the Frozen Dragon of the North. He's already noticed you, but it's not too late to run.\n"
 	fightruntext: .asciz "Yourlife (%d) Monster strength (%d) will you (f)ight or (r)un?\n"
 	fightbadinput: .asciz "What? do you want to (f)ight or (r)un?\n"
-	wonfighttext: .asciz "You defeated the monster! (%d) fights remaining\n"
+	wonfighttext: .asciz "You defeated the monster! (%d) battles remaining\n"
 	lostfighttext: .asciz "You missed and took damage! -10 health\n"
 	healthtext: .asciz "Your health: \n"
+	rungoodtext: .asciz "You ran away successfully! However (%d) battles still reamin.\n"
+	runbadtext: .asciz "You didn't get away! You took (10) damage.\n"
+	youwin: .asciz "You escaped the dungeon of despair and lived happily ever after."
+	youlose: .asciz "You did not escape the dungeon of despair and went insane and suffered for all eternity."
+
 .text
 entertocontinue:
 	push {lr}
@@ -173,7 +178,6 @@ wonfight:
 	bl printf
 	bl entertocontinue
 	bl putspacing
-	
 	bal fightloop
 lostfight:
 	ldr r0, address_of_lostfighttext
@@ -186,14 +190,52 @@ lostfight:
 	bal fightloop
 rollrun:
 	@roll against runchance
+	/******** bandaid to clear buffer *******/
+	ldr r0, address_of_charformat
+	sub sp, sp, #4
+	mov r1, sp
+	bl scanf
+	ldr r1, [sp]
+	add sp, sp, #+4
+/*************** end bandaid ************/
+	bl putspacing
+	mov r0, #100
+	bl randnum
+	cmp r0, #60    @compare roll with set chance to run
+	BGT rungood
+	BAL runbad
+rungood:
+	@ran away
+	mov r1, r10
+	ldr r0, address_of_rungoodtext
+	bl printf
+	bl entertocontinue
+	bl putspacing
+	bal fightloop
+runbad:
+	@didnt run away
+	ldr r0, address_of_runbadtext
+	bl printf
+	bl entertocontinue
+	bl putspacing
+	sub r9, r9, #10
+	cmp r9, #0
+	ble died
+	bal fightloop
 end:
 	pop {lr}
 	bx lr
 died:
 	@you died text
+	ldr r0, address_of_youlose
+	bl printf
+	bl entertocontinue
 	bal end
 wongame:
 	@you win text
+	ldr r0, address_of_youwin
+	bl printf
+	bl entertocontinue
 	bal end
 .L2:
 	.word stdin
@@ -214,3 +256,5 @@ address_of_fightbadinput: .word fightbadinput
 address_of_wonfighttext: .word wonfighttext
 address_of_lostfighttext: .word lostfighttext
 address_of_healthtext: .word healthtext
+address_of_rungoodtext: .word rungoodtext
+address_of_runbadtext: .word runbadtext
