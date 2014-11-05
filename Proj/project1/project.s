@@ -168,7 +168,7 @@ rollfight:
 	BAL lostfight
 wonfight:
 	sub r10, r10, #1
-	ldr r1, r10
+	mov r1, r10
 	ldr r0, address_of_wonfighttext
 	bl printf
 	bl entertocontinue
