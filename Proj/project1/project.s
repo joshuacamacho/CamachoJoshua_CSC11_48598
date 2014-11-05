@@ -21,8 +21,8 @@
 	healthtext: .asciz "Your health: \n"
 	rungoodtext: .asciz "You ran away successfully! However (%d) battles still reamin.\n"
 	runbadtext: .asciz "You didn't get away! You took (10) damage.\n"
-	youwin: .asciz "You escaped the dungeon of despair and lived happily ever after."
-	youlose: .asciz "You did not escape the dungeon of despair and went insane and suffered for all eternity."
+	youwin: .asciz "You escaped the dungeon of despair and lived happily ever after.\n"
+	youlose: .asciz "You did not escape the dungeon of despair and went insane and suffered for all eternity.\n"
 
 .text
 entertocontinue:
