@@ -17,7 +17,8 @@
 	fightruntext: .asciz "Yourlife (%d) Monster strength (%d) will you (f)ight or (r)un?\n"
 	fightbadinput: .asciz "What? do you want to (f)ight or (r)un?\n"
 	wonfighttext: .asciz "You defeated the monster!\n"
-
+	lostfighttext: .asciz "You missed and took damage! -10 health\n"
+	healthtext: .asciz "Your health: \n"
 .text
 entertocontinue:
 	push {lr}
@@ -28,6 +29,12 @@ entertocontinue:
 	mov r1, sp
 	bl scanf                          @ Ask for enter to be pressed
 	add sp, sp, #+4
+	pop {lr}
+	bx lr
+displayhealth:
+	push {lr}
+	ldr r0, address_of_healthtext
+	bl printf
 	pop {lr}
 	bx lr
 putspacing:
@@ -123,7 +130,8 @@ fightloop:
 	mov r6, r2 @ r6 = monster alive
 fightrunloop:
 	mov r0, r7
-	bl printf
+	bl printf  @display monster text
+	bl displayhealth
 	mov r1, r9
 	mov r2, r8
 	ldr r0, address_of_fightruntext
@@ -156,20 +164,21 @@ rollfight:
 	bl randnum
 	cmp r0, r8    @compare roll with monster str
 	BGT wonfight
+	BAL lostfight
 wonfight:
 	ldr r0, address_of_wonfighttext
 	bl printf
 	bl entertocontinue
 	sub r10, r10, #1
 	bal fightloop
-	
-	ldr r0, address_of_charformat
-	sub sp, sp, #4
-	mov r1, sp
-	bl scanf
-	ldr r1, [sp]
-	add sp, sp, #+4
-	
+lostfight
+	ldr r0, address_of_lostfighttext
+	bl printf
+	bl entertocontinue
+	sub r9, r9, #10
+	cmp r9, #0
+	ble died
+	bal fightloop
 rollrun:
 	@roll against runchance
 end:
@@ -198,3 +207,5 @@ address_of_dragontext: .word dragontext
 address_of_fightruntext: .word fightruntext
 address_of_fightbadinput: .word fightbadinput
 address_of_wonfighttext: .word wonfighttext
+address_of_lostfighttext: .word lostfighttext
+address_of_healthtext: .word healthtext
