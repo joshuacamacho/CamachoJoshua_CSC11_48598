@@ -177,6 +177,7 @@ lostfight:
 	ldr r0, address_of_lostfighttext
 	bl printf
 	bl entertocontinue
+	bl putspacing
 	sub r9, r9, #10
 	cmp r9, #0
 	ble died
