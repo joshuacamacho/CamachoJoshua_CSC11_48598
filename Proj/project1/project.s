@@ -158,7 +158,7 @@ rollfight:
 	BGT wonfight
 wonfight:
 	ldr r0, address_of_wonfighttext
-	printf
+	bl printf
 	bl entertocontinue
 	sub r10, r10, #1
 	bal fightloop
