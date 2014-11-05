@@ -159,11 +159,11 @@ rollfight:
 	bl scanf
 	ldr r1, [sp]
 	add sp, sp, #+4
-/*************** end bandaid ************/	
+/*************** end bandaid ************/
+	bl putspacing
 	mov r0, #100
 	bl randnum
 	cmp r0, r8    @compare roll with monster str
-	bl putspacing
 	BGT wonfight
 	BAL lostfight
 wonfight:
