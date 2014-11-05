@@ -163,12 +163,14 @@ rollfight:
 	mov r0, #100
 	bl randnum
 	cmp r0, r8    @compare roll with monster str
+	bl putspacing
 	BGT wonfight
 	BAL lostfight
 wonfight:
 	ldr r0, address_of_wonfighttext
 	bl printf
 	bl entertocontinue
+	bl putspacing
 	sub r10, r10, #1
 	bal fightloop
 lostfight:
