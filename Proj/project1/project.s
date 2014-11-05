@@ -171,7 +171,7 @@ wonfight:
 	bl entertocontinue
 	sub r10, r10, #1
 	bal fightloop
-lostfight
+lostfight:
 	ldr r0, address_of_lostfighttext
 	bl printf
 	bl entertocontinue
