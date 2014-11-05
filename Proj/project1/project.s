@@ -258,3 +258,5 @@ address_of_lostfighttext: .word lostfighttext
 address_of_healthtext: .word healthtext
 address_of_rungoodtext: .word rungoodtext
 address_of_runbadtext: .word runbadtext
+address_of_youwin: .word youwin
+address_of_youlose: .word youlose
