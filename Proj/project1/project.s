@@ -16,7 +16,7 @@
 	dragontext: .asciz "You have found the lair of Eredran, the Frozen Dragon of the North. He's already noticed you, but it's not too late to run.\n"
 	fightruntext: .asciz "Yourlife (%d) Monster strength (%d) will you (f)ight or (r)un?\n"
 	fightbadinput: .asciz "What? do you want to (f)ight or (r)un?\n"
-	wonfighttext: .asciz "You defeated the monster!\n"
+	wonfighttext: .asciz "You defeated the monster! (%d) fights remaining\n"
 	lostfighttext: .asciz "You missed and took damage! -10 health\n"
 	healthtext: .asciz "Your health: \n"
 .text
@@ -167,11 +167,13 @@ rollfight:
 	BGT wonfight
 	BAL lostfight
 wonfight:
+	sub r10, r10, #1
+	ldr r1, r10
 	ldr r0, address_of_wonfighttext
 	bl printf
 	bl entertocontinue
 	bl putspacing
-	sub r10, r10, #1
+	
 	bal fightloop
 lostfight:
 	ldr r0, address_of_lostfighttext
