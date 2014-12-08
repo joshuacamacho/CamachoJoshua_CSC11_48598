@@ -67,6 +67,7 @@ randnum:
 	mov r0, #0
 	bl rand
 shiftrand:
+	mov r0, r0, LSR #16
 	sub r0, r0, r2
 	cmp r0, r2
 	BGE shiftrand
