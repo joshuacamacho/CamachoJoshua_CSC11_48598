@@ -75,7 +75,7 @@ shiftrand:
 	cmp r0, r2
 	BGE shiftrand
 endrand:
-	mov r1, r0
+	mov r1, #60 @r0
 	pop {lr}
 	bx lr
 loadmonster:
