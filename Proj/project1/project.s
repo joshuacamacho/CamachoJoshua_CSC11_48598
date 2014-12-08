@@ -69,7 +69,7 @@ randnum:
 shiftrand:
 	mov r0, r0, LSR #1
 	cmp r0, r2
-	BGE shifrand
+	BGE shiftrand
 	mov r1, r0
 	pop {lr}
 	bx lr
