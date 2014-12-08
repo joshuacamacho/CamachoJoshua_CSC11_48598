@@ -67,11 +67,14 @@ randnum:
 	mov r0, #0
 	bl rand
 	mov r0, #60
-	mov r0, r0, LSR #16
+	@mov r0, r0, LSR #16
+	cmp r0, r2
+	BLT endrand
 shiftrand:
 	sub r0, r0, r2
 	cmp r0, r2
 	BGE shiftrand
+endrand:
 	mov r1, r0
 	pop {lr}
 	bx lr
