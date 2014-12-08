@@ -63,8 +63,14 @@ intro:
 randnum:
 	push {lr}
 	@r0 is max num r1 is return
+	mov r2, r0
+	mov r0, #0
 	bl rand
-	mov r1, #100 @not random yet but return
+shiftrand:
+	mov r0, r0, LSR #1
+	cmp r0, r2
+	BGE shifrand
+	mov r1, r0
 	pop {lr}
 	bx lr
 loadmonster:
@@ -119,6 +125,9 @@ endload:
 
 main:
 	push {lr}
+	mov r0, #0
+	bl time
+	bl srand
 	bl intro	
 	mov r10, #10 @ counter for battles
 	mov r9, #100 @ hitpoints
