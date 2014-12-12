@@ -1,22 +1,22 @@
 .data
+invalidtext: .asciz "Invalid input\n"
 introtext: .asciz "I have a number between 1 and 1000\nCan you guess my number?\nYou will be given a maximum of 10 guesses."
-youwintext: .asciz "1. You guessed my number, you win!\n"
 toolowtext: .asciz "2. Too low.  Try again.\n"
 toohightext: .asciz "3. Too High. Try again.\n"
 youlosetext: .asciz "4. Too many tries, you lose.\n"
+youwintext: .asciz "1. You guessed my number, you win!\n"
 trytext: .asciz "\nTry #%d .\n"
-qYN: .asciz"Would you like to play again (y)es or (n)o?\n"
-inv: .asciz"Invalid input\n"
-/* scan format */
+playagaintext: .asciz "Would you like to play again (y)es or (n)o?\n"
+
 .align 4
-scan: .asciz"%d"
+numformat: .asciz "%d"
 .align 4
-scanYN: .asciz"%s"
-/* var */
+charformat: .asciz "%s"
+/* variables */
 .align 4
-in: .word 0
+inputguess: .word 0
 .align 4
-ansYN: .word 0
+inputyesno: .word 0
 .align 4
 y: .asciz "y"
 .align 4
@@ -27,37 +27,35 @@ n: .asciz "n"
 problem1:
 	push {r4, lr}
 p1start:
-	mov r7, #1			@try counter
+	mov r7, #1			@ Counter for Num Trys
 	mov r0, #0
 	bl time
-	bl srand			@set seed
-	bl rand				@r0=rand number
-	mov r1, r0, asr #1		@cfm positive
-	ldr r2, =1000			@r2=1000
-	bl divMod			@rand()%1000, r1=ans
-	mov r5, r1			@r5=ans
-/*	ldr r0, =scan
-	bl printf*/
+	bl srand			@ Set the Seed
+	bl rand				@ r0 is the random number
+	mov r1, r0, asr #1		
+	ldr r2, =1000			
+	bl divMod			@ rand()%1000, 
+	mov r5, r1			
 	ldr r0, =introtext
-	bl printf			@output intro
+	bl printf			@ Display Intro text
 p1loop:
 	ldr r0, =trytext
 	mov r1, r7
-	bl printf			@output try counter
-	ldr r0, =scan
-	ldr r1, =in
-	bl scanf			@input in
-	ldr r1, =in
-	ldr r1, [r1]		@r1=in
-	mov r3, r1			@r3=in
+	bl printf			@ Display number of tries
+	ldr r0, =numformat
+	ldr r1, =inputguess
+	bl scanf			@ Get input
+	ldr r1, =inputguess
+	ldr r1, [r1]		 
+	mov r3, r1			
 	cmp r7, #10
 	ldreq r0, =youlosetext
 	bleq printf
-	beq Question
+	beq playagainstate
 	mov r2, r5
 	cmp r1, r2
 	blt low
-	beq bingo
+	beq winstate
 	bgt high
 low:
 	ldr r0, =toolowtext
@@ -71,26 +69,26 @@ p1count:
 	add r7, r7, #1
 	cmp r7, #11
 	ble p1loop
-bingo:
+winstate:
 	ldr r0, =youwintext
+	bl printf	
+playagainstate:
+	ldr r0, =playagaintext
 	bl printf
-Question:
-	ldr r0, =qYN
-	bl printf
-	ldr r0, =scanYN
-	ldr r1, =ansYN
+	ldr r0, =charformat
+	ldr r1, =inputyesno
 	bl scanf
-	ldr r0, =ansYN
+	ldr r0, =inputyesno
 	ldr r1, =y
 	bl strcmp
 	beq p1start
-	ldr r0, =ansYN
+	ldr r0, =inputyesno
 	ldr r1, =n
 	bl strcmp
 	beq p1end
-	ldrne r0, =inv
+	ldrne r0, =invalidtext
 	blne printf
-	bne Question
+	bne playagainstate
 p1end:
 	pop {r4, lr}
 	bx lr
