@@ -1,9 +1,9 @@
 .data
 invalidtext: .asciz "Invalid input\n"
 introtext: .asciz "I have a number between 1 and 1000\nCan you guess my number?\nYou will be given a maximum of 10 guesses."
-toolowtext: .asciz "2. Too low.  Try again.\n"
-toohightext: .asciz "3. Too High. Try again.\n"
-youlosetext: .asciz "4. Too many tries, you lose.\n"
+toolowtext: .asciz "Too low.  Try again.\n"
+toohightext: .asciz "Too High. Try again.\n"
+youlosetext: .asciz "Too many tries, you lose.\n"
 youwintext: .asciz "1. You guessed my number, you win!\n"
 trytext: .asciz "\nTry #%d .\n"
 playagaintext: .asciz "Would you like to play again (y)es or (n)o?\n"

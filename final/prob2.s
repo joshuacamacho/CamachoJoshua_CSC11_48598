@@ -1,16 +1,16 @@
 .data
-yeartext: .asciz "%d year,"
-valuetext: .asciz" value = $%f\n"
+yeartext: .asciz "Value at Year #%d:"
+valuetext: .asciz "$%.2f\n"
 askyeartext: .asciz "Input for number of years from 1-20\n"
 askratetext: .asciz "Input for the percentage of interest rate 5%% to 10%% without the %% for example for 5%% type 5\n"
 askpresentvaluetext: .asciz "Input for present value $1000-5000\n"
 numberformat: .asciz "%d"
 
 @ Variables
-resultarray: .skip 128		@result array
-year: .word 0		@number of year
-rate: .word 0		@interset value 5%-10%
-pv: .word 0		@present value
+resultarray: .skip 128  @ result array
+year: .word 0		    @ year number
+rate: .word 0		    @ rate percentage
+pv: .word 0		        @ present value
 
 .text
 	.global problem2
