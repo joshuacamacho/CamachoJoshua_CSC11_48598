@@ -14,8 +14,8 @@ intrt: .word 0		@interset value 5%-10%
 prtvle: .word 0		@present value
 
 .text
-	.global prog2
-prog2:
+	.global problem2
+problem2:
 	push {r4, lr}
 	ldr r0, =inYear
 	bl printf

@@ -9,8 +9,8 @@ x: .word 0
 .balign 4
 answer: .asciz" ax^2 +bx = %d\n"
 .text
-	.global prog4
-prog4:
+	.global problem4
+problem4:
 	push {lr}
 	ldr r0, =p4intro
 	bl printf

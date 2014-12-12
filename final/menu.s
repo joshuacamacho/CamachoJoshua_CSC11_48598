@@ -21,7 +21,7 @@ scanMenu: .asciz "%d"
 .balign 4
 inputchoice: .word 0
 .balign 4
-repeat: .asciz "Input %d\n"
+repeat: .asciz "You typed %d\n"
 .balign 4
 exit: .asciz "Press %d to exit\n"
 
@@ -55,22 +55,22 @@ menu:
 
 	mov r1, r5		 
 	cmp r1, #1
-	bleq prog1  @ Branch to Problem 1
+	bleq problem1  @ Branch to Problem 1
 	beq menu
 
 	mov r1, r5		
 	cmp r1, #2
-	bleq prog2  @ Branch to Problem 2
+	bleq problem2  @ Branch to Problem 2
 	beq menu
 
 	mov r1, r5		
 	cmp r1, #3
-	bleq prog3  @ Branch to Problem 3
+	bleq problem3  @ Branch to Problem 3
 	beq menu
 
 	mov r1, r5		
 	cmp r1, #4
-	bleq prog4  @ Branch to Problem 4
+	bleq problem4  @ Branch to Problem 4
 	
 
 end:

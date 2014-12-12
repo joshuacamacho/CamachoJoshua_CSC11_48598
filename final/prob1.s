@@ -25,7 +25,7 @@ n: .asciz"n"
 
 .text
 	.global prog1
-prog1:
+problem1:
 	push {r4, lr}
 p1start:
 	mov r7, #1			@try counter

@@ -27,8 +27,8 @@ thousand: .word 1000
 .balign 4
 tenK: .word 10000
 .text
-	.global prog3
-prog3:
+	.global problem3
+problem3:
 	push {r4, lr}
 input:
 	ldr r0, =p3intro
