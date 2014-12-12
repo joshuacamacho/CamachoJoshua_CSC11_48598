@@ -1,4 +1,5 @@
 .data
+spacing: .asciz "\033[H\033[2J"
 .balign 4
 p3intro: .asciz"Square root\n"
 .balign 4
@@ -26,10 +27,18 @@ testM: .asciz"%f\n"
 thousand: .word 1000
 .balign 4
 tenK: .word 10000
+
 .text
+putspacing:
+	push {lr}
+	ldr r0, =spacing
+	bl printf                         @ Put spacing
+	pop {lr}
+	bx lr
 	.global problem3
 problem3:
 	push {r4, lr}
+	bl putspacing
 input:
 	ldr r0, =p3intro
 	bl printf

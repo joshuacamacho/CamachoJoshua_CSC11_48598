@@ -1,4 +1,5 @@
 .data
+spacing: .asciz "\033[H\033[2J"
 yeartext: .asciz "Value at Year #%d: "
 valuetext: .asciz "$%.2f\n"
 askyeartext: .asciz "Input for number of years from 1-20\n"
@@ -13,6 +14,12 @@ rate: .word 0		    @ rate percentage
 pv: .word 0		        @ present value
 
 .text
+putspacing:
+	push {lr}
+	ldr r0, =spacing
+	bl printf                         @ Put spacing
+	pop {lr}
+	bx lr
 	.global problem2
 problem2:
 	push {r4, lr}

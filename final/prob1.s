@@ -1,4 +1,5 @@
 .data
+spacing: .asciz "\033[H\033[2J"
 invalidtext: .asciz "Invalid input\n"
 introtext: .asciz "I have a number between 1 and 1000\nCan you guess my number?\nYou will be given a maximum of 10 guesses."
 toolowtext: .asciz "Too low.  Try again.\n"
@@ -23,6 +24,12 @@ y: .asciz "y"
 n: .asciz "n"
 
 .text
+putspacing:
+	push {lr}
+	ldr r0, =spacing
+	bl printf                         @ Put spacing
+	pop {lr}
+	bx lr
 	.global problem1
 problem1:
 	push {r4, lr}

@@ -1,5 +1,5 @@
-/* ax^2 +bx = ? */
 .data
+spacing: .asciz "\033[H\033[2J"
 .balign 4
 p4intro: .asciz"find ax^2+bx\nPlease input a num between 0 and 255\n"
 .balign 4
@@ -9,6 +9,12 @@ x: .word 0
 .balign 4
 answer: .asciz" ax^2 +bx = %d\n"
 .text
+putspacing:
+	push {lr}
+	ldr r0, =spacing
+	bl printf                         @ Put spacing
+	pop {lr}
+	bx lr
 	.global problem4
 problem4:
 	push {lr}
