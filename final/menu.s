@@ -6,7 +6,7 @@
 @ Main Menu 
 	spacing: .asciz "\033[H\033[2J"
 .balign 4
-	introtext: .asciz "Main Menu\n"
+	introtext: .asciz "Main Menu\n-----------------------\n"
 .balign 4
 	prob1: .asciz "1. Problem 1\n"
 .balign 4
