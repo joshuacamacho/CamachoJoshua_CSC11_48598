@@ -1,12 +1,12 @@
 .data
 /* text */
 intro: .asciz"I have a number between 1 and 1000\nCan you guess my number?\nYou will be given a maximum of 10 guesses."
-in1: .asciz"Please type your %d guess.\n"
+in1: .asciz"Try #%d .\n"
 out1: .asciz"1. Congratulations, You guessed the number!\n"
 out2: .asciz"2. Too low.  Try again.\n"
 out3: .asciz"3. Too High. Try again.\n"
-out4: .asciz"4. Too many tries.\n"
-qYN: .asciz"Would you like to play again(y or n)?\n"
+out4: .asciz"4. Too many tries, you lose.\n"
+qYN: .asciz"Would you like to play again (y)es or (n)o?\n"
 inv: .asciz"Invalid input\n"
 /* scan format */
 .align 4

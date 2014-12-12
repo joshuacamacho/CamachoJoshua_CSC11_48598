@@ -71,13 +71,10 @@ menu:
 	mov r1, r5		
 	cmp r1, #4
 	bleq prog4  @ Branch to Problem 4
-	beq menu
-	bgt end
+	
 
 end:
-	ldr r0, =exit
-	mov r1, r5
-	bl printf
+	
 	pop {r4, lr}
 	bx lr
 
