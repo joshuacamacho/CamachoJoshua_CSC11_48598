@@ -38,7 +38,7 @@ putspacing:
 main:
 	push {r4, lr}
 menu:
-	bl putspacing
+	
 	ldr r0, =introtext
 	bl printf
 	ldr r0, =prob1
