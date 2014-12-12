@@ -24,7 +24,7 @@ y: .asciz"y"
 n: .asciz"n"
 
 .text
-	.global prog1
+	.global problem1
 problem1:
 	push {r4, lr}
 p1start:
