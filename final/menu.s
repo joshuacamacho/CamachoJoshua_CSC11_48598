@@ -63,25 +63,25 @@ menu:
 
 	mov r1, r5		 
 	cmp r1, #1
-	bl putspacing
+	
 	bleq problem1  @ Branch to Problem 1
 	beq menu
 
 	mov r1, r5		
 	cmp r1, #2
-	bl putspacing
+	
 	bleq problem2  @ Branch to Problem 2
 	beq menu
 
 	mov r1, r5		
 	cmp r1, #3
-	bl putspacing
+	
 	bleq problem3  @ Branch to Problem 3
 	beq menu
 
 	mov r1, r5		
 	cmp r1, #4
-	bl putspacing
+	
 	bleq problem4  @ Branch to Problem 4
 	
 

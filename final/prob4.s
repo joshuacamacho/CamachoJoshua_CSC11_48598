@@ -12,6 +12,7 @@ answer: .asciz" ax^2 +bx = %d\n"
 	.global problem4
 problem4:
 	push {lr}
+	bl putspacing
 	ldr r0, =p4intro
 	bl printf
 	ldr r0, addr_p4scan

@@ -26,6 +26,7 @@ n: .asciz "n"
 	.global problem1
 problem1:
 	push {r4, lr}
+	bl putspacing
 p1start:
 	mov r7, #1			@ Counter for Num Trys
 	mov r0, #0

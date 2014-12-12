@@ -16,6 +16,7 @@ pv: .word 0		        @ present value
 	.global problem2
 problem2:
 	push {r4, lr}
+	bl putspacing
 	ldr r0, =askyeartext
 	bl printf
 
