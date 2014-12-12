@@ -63,19 +63,10 @@ intro:
 randnum:
 	push {lr}
 	@r0 is max num r1 is return
-	mov r2, r0
-	mov r0, #0
-	bl rand
-	mov r0, #60
-	@mov r0, r0, LSR #16
-	cmp r0, r2
-	BLT endrand
-shiftrand:
-	sub r0, r0, r2
-	cmp r0, r2
-	BGE shiftrand
-endrand:
-	mov r1, #60 @r0
+	bl rand				@r0=rand number
+	mov r1, r0, asr #1		@cfm positive
+	ldr r2, =1000			@r2=1000
+	bl divMod			@rand()%1000, r1=ans
 	pop {lr}
 	bx lr
 loadmonster:
