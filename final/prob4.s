@@ -1,13 +1,13 @@
 .data
 spacing: .asciz "\033[H\033[2J"
 .balign 4
-p4intro: .asciz"find ax^2+bx\nPlease input a num between 0 and 255\n"
+introtextshifting: .asciz "Calculating ax^2+bx with shifting\n\Input a num between 0 and 255 to be used for x\n"
 .balign 4
-p4scan: .asciz"%d"
+numberformat: .asciz "%d"
 .balign 4
 x: .word 0
 .balign 4
-answer: .asciz" ax^2 +bx = %d\n"
+answertext: .asciz " ax^2 +bx = %d\n"
 .text
 putspacing:
 	push {lr}
@@ -19,15 +19,14 @@ putspacing:
 problem4:
 	push {lr}
 	bl putspacing
-	ldr r0, =p4intro
-	bl printf
-	ldr r0, addr_p4scan
-	ldr r1, addr_x
-	bl scanf
-
+	ldr r0, =introtextshifting
+	bl printf                         @ intro
+	ldr r0, address_of_numberformat
+	ldr r1, adress_of_x
+	bl scanf            @ input x
 	ldr r1, =0x12b02	@a 	20bit >>20
 	ldr r2, =0xe04188	@b 	24bit >>24
-	ldr r3, addr_x
+	ldr r3, adress_of_x
 	ldr r3, [r3]		@0-255	 8bit
 	mul r0, r1, r3		@ax 	28bit >>20
 	mov r0, r0, asr #4	@ax	24bit >>16
@@ -39,11 +38,11 @@ problem4:
 	mov r1, r0, asr #16
 
 
-	ldr r0, =answer
-	bl printf
+	ldr r0, =answertext
+	bl printf           @ print answer
 
 	pop {lr}
 	bx lr
 
-addr_p4scan: .word p4scan
-addr_x: .word x
+address_of_numberformat: .word numberformat
+adress_of_x: .word x

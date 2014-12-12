@@ -1,14 +1,14 @@
 .data
 spacing: .asciz "\033[H\033[2J"
 .balign 4
-p3intro: .asciz"Square root\n"
+introroottext: .asciz "Square root estimation using babylonian method\n"
 .balign 4
 S: .word 0
 .balign 4
-scan: .asciz"%d"
+numberformat: .asciz "%d"
 .balign 4
-prompt: .asciz"input a integer between 1 and 10000\n"
-output: .asciz"square root is %f\n"
+inputtext: .asciz "Input an integer between 1 and 10000\n"
+answertext: .asciz "The Square Root is %f\n"
 .balign 4
 singleX: .float 100
 .balign 4
@@ -40,11 +40,11 @@ problem3:
 	push {r4, lr}
 	bl putspacing
 input:
-	ldr r0, =p3intro
+	ldr r0, =introroottext
 	bl printf
-	ldr r0, addr_prompt
+	ldr r0, address_of_inputtext
 	bl printf
-	ldr r0, addr_scan
+	ldr r0, address_of_numberformat
 	ldr r1, addr_S
 	bl scanf
 
@@ -102,7 +102,7 @@ calculation:
 	bne calculation
 
 	vcvt.f64.f32 d4, s15
-	ldr r0, addr_output
+	ldr r0, address_of_outputtext
 	vmov r2, r3, d4
 	bl printf
 
@@ -110,8 +110,8 @@ calculation:
 	pop {r4, lr}
 	bx lr
 
-addr_scan: .word scan
+address_of_numberformat: .word numberformat
 addr_S: .word S
-addr_output: .word output
+address_of_outputtext: .word answertext
 addr_half: .word half
-addr_prompt: .word prompt
+address_of_inputtext: .word inputtext
