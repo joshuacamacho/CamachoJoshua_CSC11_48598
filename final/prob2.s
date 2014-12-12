@@ -1,8 +1,8 @@
 .data
-yeartext: .asciz "Value at Year #%d:"
+yeartext: .asciz "Value at Year #%d: "
 valuetext: .asciz "$%.2f\n"
 askyeartext: .asciz "Input for number of years from 1-20\n"
-askratetext: .asciz "Input for the percentage of interest rate 5%% to 10%% without the %% for example for 5%% type 5\n"
+askratetext: .asciz "Input for the percentage of interest rate 5%% to 10%% without the %%\nExample: for 5%% type 5\n"
 askpresentvaluetext: .asciz "Input for present value $1000-5000\n"
 numberformat: .asciz "%d"
 

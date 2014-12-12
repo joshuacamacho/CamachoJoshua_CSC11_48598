@@ -4,33 +4,41 @@
 
 .data
 @ Main Menu 
+	spacing: .asciz "\033[H\033[2J"
 .balign 4
-introtext: .asciz "Main Menu\n"
+	introtext: .asciz "Main Menu\n"
 .balign 4
-prob1: .asciz "1. Problem 1\n"
+	prob1: .asciz "1. Problem 1\n"
 .balign 4
-prob2: .asciz "2. Problem 2\n"
+	prob2: .asciz "2. Problem 2\n"
 .balign 4
-prob3: .asciz "3. Problem 3\n"
+	prob3: .asciz "3. Problem 3\n"
 .balign 4
-prob4: .asciz "4. Problem 4\n"
+	prob4: .asciz "4. Problem 4\n"
 .balign 4
-probexit: .asciz "0. Exit\n"
+	probexit: .asciz "0. Exit\n"
 .balign 4
-scanMenu: .asciz "%d"
+	scanMenu: .asciz "%d"
 .balign 4
-inputchoice: .word 0
+	inputchoice: .word 0
 .balign 4
-repeat: .asciz "You typed %d\n"
+	repeat: .asciz "You typed %d\n"
 .balign 4
-exit: .asciz "Press %d to exit\n"
+	exit: .asciz "Press %d to exit\n"
 
 
 .text
+putspacing:
+	push {lr}
+	ldr r0, =spacing
+	bl printf                         @ Put spacing
+	pop {lr}
+	bx lr
 	.global main
 main:
 	push {r4, lr}
 menu:
+	bl putspacing
 	ldr r0, =introtext
 	bl printf
 	ldr r0, =prob1
@@ -55,21 +63,25 @@ menu:
 
 	mov r1, r5		 
 	cmp r1, #1
+	bl putspacing
 	bleq problem1  @ Branch to Problem 1
 	beq menu
 
 	mov r1, r5		
 	cmp r1, #2
+	bl putspacing
 	bleq problem2  @ Branch to Problem 2
 	beq menu
 
 	mov r1, r5		
 	cmp r1, #3
+	bl putspacing
 	bleq problem3  @ Branch to Problem 3
 	beq menu
 
 	mov r1, r5		
 	cmp r1, #4
+	bl putspacing
 	bleq problem4  @ Branch to Problem 4
 	
 
@@ -78,7 +90,7 @@ end:
 	pop {r4, lr}
 	bx lr
 
-/* external */
+
 .global printf
 .global scanf
 .global strcmp
