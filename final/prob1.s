@@ -7,12 +7,12 @@ youlosetext: .asciz "4. Too many tries, you lose.\n"
 youwintext: .asciz "1. You guessed my number, you win!\n"
 trytext: .asciz "\nTry #%d .\n"
 playagaintext: .asciz "Would you like to play again (y)es or (n)o?\n"
-
 .align 4
 numformat: .asciz "%d"
 .align 4
 charformat: .asciz "%s"
-/* variables */
+
+@ Variables
 .align 4
 inputguess: .word 0
 .align 4
